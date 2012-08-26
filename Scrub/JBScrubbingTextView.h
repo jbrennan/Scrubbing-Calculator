@@ -1,5 +1,5 @@
 //
-//  JBAppDelegate.h
+//  JBScrubbingTextView.h
 //  Scrub
 //
 //  Created by Jason Brennan on 12-08-26.
@@ -8,5 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface JBAppDelegate : NSObject <NSApplicationDelegate>
+@interface JBScrubbingTextView : NSTextView
+
 @end

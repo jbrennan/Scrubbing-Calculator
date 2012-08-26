@@ -7,12 +7,16 @@
 //
 
 #import "JBAppDelegate.h"
+#import "JBScrubbingTextViewWindowController.h"
 
-@implementation JBAppDelegate
+@implementation JBAppDelegate {
+	JBScrubbingTextViewWindowController *_windowController;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	// Insert code here to initialize your application
+	_windowController = [JBScrubbingTextViewWindowController new];
+	[[_windowController window] makeKeyAndOrderFront:self];
 }
 
 @end

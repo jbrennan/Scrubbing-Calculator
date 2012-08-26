@@ -13,6 +13,9 @@
 		CD047F5915EADF7D00B8A384 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CD047F5715EADF7D00B8A384 /* Credits.rtf */; };
 		CD047F5C15EADF7D00B8A384 /* JBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD047F5B15EADF7D00B8A384 /* JBAppDelegate.m */; };
 		CD047F5F15EADF7D00B8A384 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD047F5D15EADF7D00B8A384 /* MainMenu.xib */; };
+		CD047F6815EAE08200B8A384 /* JBScrubbingTextViewWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD047F6615EAE08200B8A384 /* JBScrubbingTextViewWindowController.m */; };
+		CD047F6915EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD047F6715EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib */; };
+		CD047F6C15EAE79800B8A384 /* JBScrubbingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,11 @@
 		CD047F5A15EADF7D00B8A384 /* JBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBAppDelegate.h; sourceTree = "<group>"; };
 		CD047F5B15EADF7D00B8A384 /* JBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBAppDelegate.m; sourceTree = "<group>"; };
 		CD047F5E15EADF7D00B8A384 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CD047F6515EAE08200B8A384 /* JBScrubbingTextViewWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBScrubbingTextViewWindowController.h; sourceTree = "<group>"; };
+		CD047F6615EAE08200B8A384 /* JBScrubbingTextViewWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBScrubbingTextViewWindowController.m; sourceTree = "<group>"; };
+		CD047F6715EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JBScrubbingTextViewWindowController.xib; sourceTree = "<group>"; };
+		CD047F6A15EAE79800B8A384 /* JBScrubbingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBScrubbingTextView.h; sourceTree = "<group>"; };
+		CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBScrubbingTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +92,13 @@
 			children = (
 				CD047F5A15EADF7D00B8A384 /* JBAppDelegate.h */,
 				CD047F5B15EADF7D00B8A384 /* JBAppDelegate.m */,
+				CD047F6515EAE08200B8A384 /* JBScrubbingTextViewWindowController.h */,
+				CD047F6615EAE08200B8A384 /* JBScrubbingTextViewWindowController.m */,
+				CD047F6715EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib */,
 				CD047F5D15EADF7D00B8A384 /* MainMenu.xib */,
 				CD047F4F15EADF7D00B8A384 /* Supporting Files */,
+				CD047F6A15EAE79800B8A384 /* JBScrubbingTextView.h */,
+				CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */,
 			);
 			path = Scrub;
 			sourceTree = "<group>";
@@ -157,6 +170,7 @@
 				CD047F5315EADF7D00B8A384 /* InfoPlist.strings in Resources */,
 				CD047F5915EADF7D00B8A384 /* Credits.rtf in Resources */,
 				CD047F5F15EADF7D00B8A384 /* MainMenu.xib in Resources */,
+				CD047F6915EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +183,8 @@
 			files = (
 				CD047F5515EADF7D00B8A384 /* main.m in Sources */,
 				CD047F5C15EADF7D00B8A384 /* JBAppDelegate.m in Sources */,
+				CD047F6815EAE08200B8A384 /* JBScrubbingTextViewWindowController.m in Sources */,
+				CD047F6C15EAE79800B8A384 /* JBScrubbingTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
