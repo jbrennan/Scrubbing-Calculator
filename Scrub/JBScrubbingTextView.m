@@ -40,7 +40,7 @@
 - (void)commonInitWithFrame:(CGRect)frame {
 	[[self textStorage] setDelegate:self];
 	[self setTextContainerInset:CGSizeMake(10, 10)];
-	_symbols = @[@"+", @"-", @"/", @"*", @"x", @"X", @"="];
+	_symbols = @[@"+", @"-", @"/", @"*", @"x", @"X", @"=", @"(", @")"];
 }
 
 
@@ -56,7 +56,38 @@
 
 
 - (void)parseMath {
+	// Tokenize the string and ignore all words
+	NSMutableArray *expressionTokens = [@[] mutableCopy];
 	
+	NSString *string = [[self textStorage] string];
+	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:string];
+	
+	tokenizer.commentState.reportsCommentTokens = NO;
+	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
+	
+	// Recognize 'x' as a symbol for multiplication
+	[tokenizer setTokenizerState:tokenizer.symbolState from:'x' to:'x'];
+	[tokenizer setTokenizerState:tokenizer.symbolState from:'X' to:'X'];
+	
+	PKToken *eof = [PKToken EOFToken];
+	PKToken *token = nil;
+	
+	[[self textStorage] beginEditing];
+	
+	
+	while ((token = [tokenizer nextToken]) != eof) {
+		
+		if ([token isNumber]) {
+			[expressionTokens addObject:token];
+		} else if ([token isSymbol] && [_symbols containsObject:[token stringValue]]) {
+			[expressionTokens addObject:token];
+		}
+		
+	
+	}
+	NSLog(@"Expression tokens: %@", expressionTokens);
+	
+	[[self textStorage] endEditing];
 }
 
 
