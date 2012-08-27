@@ -39,6 +39,7 @@
 
 - (void)commonInitWithFrame:(CGRect)frame {
 	[[self textStorage] setDelegate:self];
+	[self setTextContainerInset:CGSizeMake(10, 10)];
 	_symbols = @[@"+", @"-", @"/", @"*", @"x", @"X", @"="];
 }
 
