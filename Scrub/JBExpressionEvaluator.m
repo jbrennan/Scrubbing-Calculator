@@ -5,6 +5,8 @@
 //  Created by Jason Brennan on 12-08-26.
 //  Copyright (c) 2012 Jason Brennan. All rights reserved.
 //
+//  c.f.: http://faculty.cs.niu.edu/~hutchins/csci241/eval.htm
+
 
 #import "JBExpressionEvaluator.h"
 
@@ -38,9 +40,7 @@
 	JBExpressionEvaluator *evaluator = [self evaluator];
 	NSArray *postfix = [evaluator postfixExpressionFromInfixExpression:expression];
 	
-	NSLog(@"%@", postfix);
-	
-	return @"";
+	return [evaluator evaluatePostfixExpression:postfix];
 }
 
 
@@ -80,15 +80,15 @@
 		}
 		
 		
-		if ([self isOperator:token]) {
+		if ([self isOperator:[token lowercaseString]]) {
 			if ([stack count] < 1 || [[stack lastObject] isEqualToString:@"("]) {
-				[stack addObject:token];
+				[stack addObject:[token lowercaseString]];
 			} else {
 				while ([stack count] > 0 && ![[stack lastObject] isEqualToString:@"("] && [self operator:token hasLowerOrEqualPrecendence:[stack lastObject]]) {
 					[post addObject:[stack lastObject]];
 					[stack removeLastObject];
 				}
-				[stack addObject:token];
+				[stack addObject:[token lowercaseString]];
 			}
 		}
 		
@@ -103,6 +103,56 @@
 
 	
 	return [NSArray arrayWithArray:post];
+}
+
+
+
+- (NSString *)evaluatePostfixExpression:(NSArray *)expression {
+	
+	NSMutableArray *stack = [@[] mutableCopy];
+	
+	for (NSString *token in expression) {
+		if ([self isOperand:token]) {
+			[stack addObject:token];
+			continue;
+		}
+		
+		
+		if ([self isOperator:token]) {
+			NSString *a = [stack lastObject];
+			[stack removeLastObject];
+			
+			NSString *b = [stack lastObject];
+			[stack removeLastObject];
+			
+			[stack addObject:[self evaluateExpressionWithFirstOperand:a secondOperand:b operator:token]];
+		}
+		
+	}
+	
+	return [stack lastObject];
+}
+
+
+- (NSString *)evaluateExpressionWithFirstOperand:(NSString *)a secondOperand:(NSString *)b operator:(NSString *)operator {
+	NSNumber *numA = [self numberFromString:a];
+	NSNumber *numB = [self numberFromString:b];
+	
+	double dA = [numA doubleValue];
+	double dB = [numB doubleValue];
+	double result = 0;
+	
+	if ([operator isEqualToString:@"+"]) {
+		result = dB + dA;
+	} else if ([operator isEqualToString:@"-"]) {
+		result = dB - dA;
+	} else if ([operator isEqualToString:@"/"]) {
+		result = (NSInteger)dA == 0? 0.0 : dB / dA; // avoiding divide by zero problems and just return 0
+	} else if ([operator isEqualToString:@"x"] || [operator isEqualToString:@"*"]) {
+		result = dB * dA;
+	}
+	
+	return [NSString stringWithFormat:@"%f", result];
 }
 
 

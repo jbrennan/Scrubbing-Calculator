@@ -45,7 +45,7 @@
 }
 
 
-- (void)textStorageDidProcessEditing:(NSNotification *)notification {
+- (void)textStorageWillProcessEditing:(NSNotification *)notification {
 	[self parseText];
 }
 
@@ -74,20 +74,47 @@
 	PKToken *token = nil;
 	
 	[[self textStorage] beginEditing];
-	
+	NSRange selectionRange = [self selectedRange];
 	
 	while ((token = [tokenizer nextToken]) != eof) {
 		
 		if ([token isNumber]) {
 			[expressionTokens addObject:[token stringValue]];
 		} else if ([token isSymbol] && [_symbols containsObject:[token stringValue]]) {
+			
+			if ([[token stringValue] isEqualToString:@"="]) break;
+			
 			[expressionTokens addObject:[token stringValue]];
+		} else if ([token isSymbol] && [[token stringValue] isEqualToString:@"="]) {
+			break;
 		}
 		
 	
 	}
 	NSLog(@"Expression tokens: %@", expressionTokens);
-	[JBExpressionEvaluator evaluateExpression:expressionTokens];
+	NSString *result = [JBExpressionEvaluator evaluateExpression:expressionTokens];
+	
+	if ([result length]) {
+		// append the answer with an = if the line doesn't already have one.
+		NSRange lineRange = [string lineRangeForRange:[self selectedRange]];
+		NSString *line = [string substringWithRange:lineRange];
+		NSLog(@"line: %@", line);
+		NSRange eqRange = [line rangeOfString:@"="];
+		if (NSNotFound == eqRange.location) {
+			line = [line stringByAppendingFormat:@" = %@", result];
+		} else {
+			// replace everything after the equal sign
+			NSString *before = [line substringToIndex:NSMaxRange(eqRange)];
+			NSLog(@"before: %@", before);
+			line = [before stringByAppendingFormat:@" %@", result];
+		}
+		//lineRange.length = [line length];
+		[[self textStorage] replaceCharactersInRange:lineRange withString:line];
+		
+	} else {
+		// get rid of the equal sign, if any
+	}
+	[self setSelectedRange:selectionRange];
 	[[self textStorage] endEditing];
 }
 
