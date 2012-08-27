@@ -7,6 +7,7 @@
 //
 
 #import "JBScrubbingTextView.h"
+#import <ParseKit/ParseKit.h>
 
 @interface JBScrubbingTextView () <NSTextStorageDelegate>
 @end

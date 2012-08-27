@@ -16,7 +16,67 @@
 		CD047F6815EAE08200B8A384 /* JBScrubbingTextViewWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD047F6615EAE08200B8A384 /* JBScrubbingTextViewWindowController.m */; };
 		CD047F6915EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD047F6715EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib */; };
 		CD047F6C15EAE79800B8A384 /* JBScrubbingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */; };
+		CD047F8B15EAEF4A00B8A384 /* ParseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD047F7E15EAEF3200B8A384 /* ParseKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CD047F7D15EAEF3200B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = ParseKit;
+		};
+		CD047F7F15EAEF3200B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D389F1CE0F1965E600558235;
+			remoteInfo = JSParseKit;
+		};
+		CD047F8115EAEF3200B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D3FDC5830FFC4BFC00F1F797;
+			remoteInfo = ParseKitMobile;
+		};
+		CD047F8315EAEF3200B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D37D8DC61571A4F700CDB822;
+			remoteInfo = Tests;
+		};
+		CD047F8515EAEF3200B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D33494100E2963FD00406085;
+			remoteInfo = DemoApp;
+		};
+		CD047F8715EAEF3200B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D34185040E520D3F0081B0DC;
+			remoteInfo = DebugApp;
+		};
+		CD047F8915EAEF3200B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D389F2030F196A7500558235;
+			remoteInfo = JSDemoApp;
+		};
+		CD047F8C15EAEF5600B8A384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = ParseKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CD047F4415EADF7D00B8A384 /* Scrub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scrub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +97,7 @@
 		CD047F6715EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JBScrubbingTextViewWindowController.xib; sourceTree = "<group>"; };
 		CD047F6A15EAE79800B8A384 /* JBScrubbingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBScrubbingTextView.h; sourceTree = "<group>"; };
 		CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBScrubbingTextView.m; sourceTree = "<group>"; };
+		CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParseKit.xcodeproj; path = ../../parsekit/ParseKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD047F8B15EAEF4A00B8A384 /* ParseKit.framework in Frameworks */,
 				CD047F4915EADF7D00B8A384 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +168,7 @@
 		CD047F4F15EADF7D00B8A384 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */,
 				CD047F5015EADF7D00B8A384 /* Scrub-Info.plist */,
 				CD047F5115EADF7D00B8A384 /* InfoPlist.strings */,
 				CD047F5415EADF7D00B8A384 /* main.m */,
@@ -113,6 +176,20 @@
 				CD047F5715EADF7D00B8A384 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD047F6E15EAEF3200B8A384 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD047F7E15EAEF3200B8A384 /* ParseKit.framework */,
+				CD047F8015EAEF3200B8A384 /* JSParseKit.framework */,
+				CD047F8215EAEF3200B8A384 /* libparsekit.a */,
+				CD047F8415EAEF3200B8A384 /* Tests.octest */,
+				CD047F8615EAEF3200B8A384 /* DemoApp.app */,
+				CD047F8815EAEF3200B8A384 /* DebugApp.app */,
+				CD047F8A15EAEF3200B8A384 /* JSDemoApp.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +206,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CD047F8D15EAEF5600B8A384 /* PBXTargetDependency */,
 			);
 			name = Scrub;
 			productName = Scrub;
@@ -155,12 +233,70 @@
 			mainGroup = CD047F3915EADF7D00B8A384;
 			productRefGroup = CD047F4515EADF7D00B8A384 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CD047F6E15EAEF3200B8A384 /* Products */;
+					ProjectRef = CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CD047F4315EADF7D00B8A384 /* Scrub */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CD047F7E15EAEF3200B8A384 /* ParseKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParseKit.framework;
+			remoteRef = CD047F7D15EAEF3200B8A384 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD047F8015EAEF3200B8A384 /* JSParseKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JSParseKit.framework;
+			remoteRef = CD047F7F15EAEF3200B8A384 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD047F8215EAEF3200B8A384 /* libparsekit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libparsekit.a;
+			remoteRef = CD047F8115EAEF3200B8A384 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD047F8415EAEF3200B8A384 /* Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Tests.octest;
+			remoteRef = CD047F8315EAEF3200B8A384 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD047F8615EAEF3200B8A384 /* DemoApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = DemoApp.app;
+			remoteRef = CD047F8515EAEF3200B8A384 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD047F8815EAEF3200B8A384 /* DebugApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = DebugApp.app;
+			remoteRef = CD047F8715EAEF3200B8A384 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD047F8A15EAEF3200B8A384 /* JSDemoApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = JSDemoApp.app;
+			remoteRef = CD047F8915EAEF3200B8A384 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CD047F4215EADF7D00B8A384 /* Resources */ = {
@@ -189,6 +325,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD047F8D15EAEF5600B8A384 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ParseKit;
+			targetProxy = CD047F8C15EAEF5600B8A384 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CD047F5115EADF7D00B8A384 /* InfoPlist.strings */ = {
@@ -312,6 +456,7 @@
 				CD047F6415EADF7D00B8A384 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
