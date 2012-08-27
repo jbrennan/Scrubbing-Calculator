@@ -24,7 +24,7 @@
     [super windowDidLoad];
     
     [self.textView setDelegate:self];
-	[self.textView setFont:[NSFont fontWithName:@"Menlo" size:18.0f]];
+	[self.textView setFont:[NSFont fontWithName:@"Menlo" size:21.0f]];
 }
 
 @end

@@ -13,7 +13,9 @@
 @end
 
 
-@implementation JBScrubbingTextView
+@implementation JBScrubbingTextView {
+	NSArray *_symbols;
+}
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -37,6 +39,7 @@
 
 - (void)commonInitWithFrame:(CGRect)frame {
 	[[self textStorage] setDelegate:self];
+	_symbols = @[@"+", @"-", @"/", @"*", @"x", @"X", @"="];
 }
 
 
@@ -58,7 +61,41 @@
 
 
 - (void)highlightText {
+	NSString *string = [[self textStorage] string];
+	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:string];
 	
+	tokenizer.commentState.reportsCommentTokens = NO;
+	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
+	
+	// Recognize 'x' as a symbol for multiplication
+	[tokenizer setTokenizerState:tokenizer.symbolState from:'x' to:'x'];
+	[tokenizer setTokenizerState:tokenizer.symbolState from:'X' to:'X'];
+	
+	PKToken *eof = [PKToken EOFToken];
+	PKToken *token = nil;
+	
+	[[self textStorage] beginEditing];
+	
+	NSUInteger currentLocation = 0;
+	
+	while ((token = [tokenizer nextToken]) != eof) {
+		NSColor *fontColor = [NSColor grayColor];
+		
+		if ([token isNumber]) {
+			fontColor = [NSColor textColor];
+		} else if ([token isSymbol]) {
+			// which symbol?
+			if ([_symbols containsObject:[token stringValue]]) {
+				fontColor = [NSColor purpleColor];
+			}
+		}
+		
+		[[self textStorage] addAttribute:NSForegroundColorAttributeName value:fontColor range:NSMakeRange(currentLocation, [[token stringValue] length])];
+		currentLocation += [[token stringValue] length];
+	}
+	
+	
+	[[self textStorage] endEditing];
 }
 
 
