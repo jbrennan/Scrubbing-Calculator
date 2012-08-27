@@ -17,6 +17,7 @@
 		CD047F6915EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD047F6715EAE08200B8A384 /* JBScrubbingTextViewWindowController.xib */; };
 		CD047F6C15EAE79800B8A384 /* JBScrubbingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */; };
 		CD047F8B15EAEF4A00B8A384 /* ParseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD047F7E15EAEF3200B8A384 /* ParseKit.framework */; };
+		CD8B41ED15EB030200BB3800 /* JBExpressionEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B41EC15EB030200BB3800 /* JBExpressionEvaluator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,8 @@
 		CD047F6A15EAE79800B8A384 /* JBScrubbingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBScrubbingTextView.h; sourceTree = "<group>"; };
 		CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBScrubbingTextView.m; sourceTree = "<group>"; };
 		CD047F6D15EAEF3200B8A384 /* ParseKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParseKit.xcodeproj; path = ../../parsekit/ParseKit.xcodeproj; sourceTree = "<group>"; };
+		CD8B41EB15EB030200BB3800 /* JBExpressionEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBExpressionEvaluator.h; sourceTree = "<group>"; };
+		CD8B41EC15EB030200BB3800 /* JBExpressionEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBExpressionEvaluator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,8 @@
 				CD047F4F15EADF7D00B8A384 /* Supporting Files */,
 				CD047F6A15EAE79800B8A384 /* JBScrubbingTextView.h */,
 				CD047F6B15EAE79800B8A384 /* JBScrubbingTextView.m */,
+				CD8B41EB15EB030200BB3800 /* JBExpressionEvaluator.h */,
+				CD8B41EC15EB030200BB3800 /* JBExpressionEvaluator.m */,
 			);
 			path = Scrub;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				CD047F5C15EADF7D00B8A384 /* JBAppDelegate.m in Sources */,
 				CD047F6815EAE08200B8A384 /* JBScrubbingTextViewWindowController.m in Sources */,
 				CD047F6C15EAE79800B8A384 /* JBScrubbingTextView.m in Sources */,
+				CD8B41ED15EB030200BB3800 /* JBExpressionEvaluator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

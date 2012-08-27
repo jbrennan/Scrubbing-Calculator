@@ -7,6 +7,7 @@
 //
 
 #import "JBScrubbingTextView.h"
+#import "JBExpressionEvaluator.h"
 #import <ParseKit/ParseKit.h>
 
 @interface JBScrubbingTextView () <NSTextStorageDelegate>
@@ -78,15 +79,15 @@
 	while ((token = [tokenizer nextToken]) != eof) {
 		
 		if ([token isNumber]) {
-			[expressionTokens addObject:token];
+			[expressionTokens addObject:[token stringValue]];
 		} else if ([token isSymbol] && [_symbols containsObject:[token stringValue]]) {
-			[expressionTokens addObject:token];
+			[expressionTokens addObject:[token stringValue]];
 		}
 		
 	
 	}
 	NSLog(@"Expression tokens: %@", expressionTokens);
-	
+	[JBExpressionEvaluator evaluateExpression:expressionTokens];
 	[[self textStorage] endEditing];
 }
 
