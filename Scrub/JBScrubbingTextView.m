@@ -45,13 +45,22 @@
 }
 
 
-- (void)textStorageWillProcessEditing:(NSNotification *)notification {
-	[self parseText];
+- (void)insertText:(id)insertString {
+	[super insertText:insertString];
+	NSRange selectedRange = [self selectedRange];
+	[self parseMath];
+	[self setSelectedRange:selectedRange];
 }
 
 
-- (void)parseText {
+- (void)deleteBackward:(id)sender {
+	[super deleteBackward:sender];
+	NSRange selectedRange = [self selectedRange];
 	[self parseMath];
+	[self setSelectedRange:selectedRange];
+}
+
+- (void)textStorageDidProcessEditing:(NSNotification *)notification {
 	[self highlightText];
 }
 
@@ -73,7 +82,7 @@
 	PKToken *eof = [PKToken EOFToken];
 	PKToken *token = nil;
 	
-	[[self textStorage] beginEditing];
+	//[[self textStorage] beginEditing];
 	NSRange selectionRange = [self selectedRange];
 	
 	while ((token = [tokenizer nextToken]) != eof) {
@@ -91,10 +100,12 @@
 		
 	
 	}
-	NSLog(@"Expression tokens: %@", expressionTokens);
-	NSString *result = [JBExpressionEvaluator evaluateExpression:expressionTokens];
+
 	
-	if ([result length]) {
+	
+	
+	if ([JBExpressionEvaluator expressionCanEvaluate:expressionTokens]) {
+		NSString *result = [JBExpressionEvaluator evaluateExpression:expressionTokens];
 		// append the answer with an = if the line doesn't already have one.
 		NSRange lineRange = [string lineRangeForRange:[self selectedRange]];
 		NSString *line = [string substringWithRange:lineRange];
@@ -109,13 +120,22 @@
 			line = [before stringByAppendingFormat:@" %@", result];
 		}
 		//lineRange.length = [line length];
-		[[self textStorage] replaceCharactersInRange:lineRange withString:line];
+		[[[self textStorage] mutableString] replaceCharactersInRange:lineRange withString:line];
+		//[[self textStorage] edited:<#(NSUInteger)#> range:<#(NSRange)#> changeInLength:<#(NSInteger)#>]
 		
 	} else {
-		// get rid of the equal sign, if any
+		
+		NSRange lineRange = [string lineRangeForRange:[self selectedRange]];
+		NSString *line = [string substringWithRange:lineRange];
+		
+		NSRange eqRange = [line rangeOfString:@"="];
+		if (NSNotFound != eqRange.location) {
+			line = [line substringToIndex:eqRange.location];
+		}
+		[[self textStorage] replaceCharactersInRange:lineRange withString:line];
 	}
-	[self setSelectedRange:selectionRange];
-	[[self textStorage] endEditing];
+	//[self setSelectedRange:selectionRange];
+	//[[self textStorage] endEditing];
 }
 
 

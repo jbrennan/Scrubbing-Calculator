@@ -44,6 +44,17 @@
 }
 
 
++ (BOOL)expressionCanEvaluate:(NSArray *)expression {
+	JBExpressionEvaluator *evaluator = [self evaluator];
+	for (NSString *token in expression) {
+		if ([evaluator isOperator:token])
+			return YES;
+	}
+	
+	return NO;
+}
+
+
 - (NSArray *)postfixExpressionFromInfixExpression:(NSArray *)expression {
 	
 	NSMutableArray *post = [@[] mutableCopy];

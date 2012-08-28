@@ -10,4 +10,5 @@
 
 @interface JBExpressionEvaluator : NSObject
 + (NSString *)evaluateExpression:(NSArray *)expression;
++ (BOOL)expressionCanEvaluate:(NSArray *)expression;
 @end
