@@ -66,6 +66,16 @@
 
 
 - (void)parseMath {
+	
+	/*
+	 *
+	 *
+	 * BUUUUUUUUG: Currently only supports the first line. Ideally, I should be enumerating ALL THE LINES!
+	 *
+	 *
+	 *
+	 */
+	
 	// Tokenize the string and ignore all words
 	NSMutableArray *expressionTokens = [@[] mutableCopy];
 	
@@ -128,7 +138,7 @@
 		NSRange lineRange = [string lineRangeForRange:[self selectedRange]];
 		NSString *line = [string substringWithRange:lineRange];
 		
-		NSRange eqRange = [line rangeOfString:@"="];
+		NSRange eqRange = [line rangeOfString:@" ="];
 		if (NSNotFound != eqRange.location) {
 			line = [line substringToIndex:eqRange.location];
 		}
