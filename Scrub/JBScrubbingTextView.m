@@ -82,8 +82,8 @@
 	PKToken *eof = [PKToken EOFToken];
 	PKToken *token = nil;
 	
-	//[[self textStorage] beginEditing];
-	NSRange selectionRange = [self selectedRange];
+	
+	
 	
 	while ((token = [tokenizer nextToken]) != eof) {
 		
@@ -119,9 +119,9 @@
 			NSLog(@"before: %@", before);
 			line = [before stringByAppendingFormat:@" %@", result];
 		}
-		//lineRange.length = [line length];
+		
 		[[[self textStorage] mutableString] replaceCharactersInRange:lineRange withString:line];
-		//[[self textStorage] edited:<#(NSUInteger)#> range:<#(NSRange)#> changeInLength:<#(NSInteger)#>]
+		
 		
 	} else {
 		
@@ -134,8 +134,7 @@
 		}
 		[[self textStorage] replaceCharactersInRange:lineRange withString:line];
 	}
-	//[self setSelectedRange:selectionRange];
-	//[[self textStorage] endEditing];
+	
 }
 
 

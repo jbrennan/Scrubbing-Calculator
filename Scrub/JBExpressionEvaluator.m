@@ -46,12 +46,35 @@
 
 + (BOOL)expressionCanEvaluate:(NSArray *)expression {
 	JBExpressionEvaluator *evaluator = [self evaluator];
-	for (NSString *token in expression) {
-		if ([evaluator isOperator:token])
-			return YES;
-	}
 	
-	return NO;
+	
+	// Consider an expression valid if, after put in postfix notation,
+	// there is at least 1 operator and at least 2 operands.
+	// This isn't mathematically correct, but pragmatically it feels better while typing.
+	NSArray *postfix = [evaluator postfixExpressionFromInfixExpression:expression];
+	NSInteger operators = 0, operands = 0;
+	
+	for (NSString *token in postfix) {
+		if ([evaluator isOperand:token]) {
+			operands++;
+			continue;
+		}
+		
+		
+		if ([evaluator isOperator:token]) {
+			operators++;
+		}
+	}
+	if (operators > 0 && operands > 1) return YES;
+	else return NO;
+	
+	
+	// A more dogmatic, but less ideal way would be the following:
+	// Consider an expression valid if, after put in postfix notation, for n operators there are n+1 operands
+	// This assumes only binary operators (i.e., no exponentials)
+	if (operators < 1) return NO;
+	
+	return (operators + 1 == operands);
 }
 
 
