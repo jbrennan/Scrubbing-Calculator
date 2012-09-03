@@ -116,18 +116,20 @@
 	
 	if ([JBExpressionEvaluator expressionCanEvaluate:expressionTokens]) {
 		NSString *result = [JBExpressionEvaluator evaluateExpression:expressionTokens];
+		NSString *prettierResult = [NSString stringWithFormat:@"%g", [result doubleValue]];
+		
 		// append the answer with an = if the line doesn't already have one.
 		NSRange lineRange = [string lineRangeForRange:[self selectedRange]];
 		NSString *line = [string substringWithRange:lineRange];
 		NSLog(@"line: %@", line);
 		NSRange eqRange = [line rangeOfString:@"="];
 		if (NSNotFound == eqRange.location) {
-			line = [line stringByAppendingFormat:@" = %@", result];
+			line = [line stringByAppendingFormat:@" = %@", prettierResult];
 		} else {
 			// replace everything after the equal sign
 			NSString *before = [line substringToIndex:NSMaxRange(eqRange)];
 			NSLog(@"before: %@", before);
-			line = [before stringByAppendingFormat:@" %@", result];
+			line = [before stringByAppendingFormat:@" %@", prettierResult];
 		}
 		
 		[[[self textStorage] mutableString] replaceCharactersInRange:lineRange withString:line];
