@@ -204,6 +204,26 @@
 }
 
 
+- (BOOL)shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
+	
+	// This happens when only the text attributes are changing.
+	if (nil == replacementString) return YES;
+	
+	NSRange lineRange = [[self string] lineRangeForRange:affectedCharRange];
+	NSString *currentLine = [self currentLineForRange:affectedCharRange];
+	NSRange equalRange = [currentLine rangeOfString:@"=" options:kNilOptions range:lineRange];
+	if (NSNotFound == equalRange.location) return YES; // no equal sign in this line so we don't care
+	
+	return (NSMaxRange(affectedCharRange) <= equalRange.location + lineRange.location);
+}
+
+
+- (NSString *)currentLineForRange:(NSRange)range {
+	NSRange lineRange = [[self string] lineRangeForRange:range];
+	return [[self string] substringWithRange:lineRange];
+}
+
+
 
 
 @end
