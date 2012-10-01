@@ -49,7 +49,8 @@
 	[super insertText:insertString];
 	NSRange selectedRange = [self selectedRange];
 	[self parseMath];
-	[self setSelectedRange:selectedRange];
+	
+	[self resetSelectionRange:selectedRange];
 }
 
 
@@ -57,7 +58,19 @@
 	[super deleteBackward:sender];
 	NSRange selectedRange = [self selectedRange];
 	[self parseMath];
-	[self setSelectedRange:selectedRange];
+	
+	[self resetSelectionRange:selectedRange];
+}
+
+
+- (void)resetSelectionRange:(NSRange)oldSelectionRange {
+	if (NSMaxRange(oldSelectionRange) <= [[self string] length]) {
+		[self setSelectedRange:oldSelectionRange];
+	} else {
+		// This might happen when the inserted character is actually removed by the math parsing.
+		// i.e., inserted something after the = sign and it was replaced.
+		[self setSelectedRange:NSMakeRange([[self string] length], 0)];
+	}
 }
 
 - (void)textStorageDidProcessEditing:(NSNotification *)notification {
@@ -121,8 +134,10 @@
 		// append the answer with an = if the line doesn't already have one.
 		NSRange lineRange = [string lineRangeForRange:[self selectedRange]];
 		NSString *line = [string substringWithRange:lineRange];
+		
 		NSLog(@"line: %@", line);
 		NSRange eqRange = [line rangeOfString:@"="];
+		
 		if (NSNotFound == eqRange.location) {
 			line = [line stringByAppendingFormat:@" = %@", prettierResult];
 		} else {
@@ -133,7 +148,6 @@
 		}
 		
 		[[[self textStorage] mutableString] replaceCharactersInRange:lineRange withString:line];
-		
 		
 	} else {
 		
@@ -188,16 +202,6 @@
 	
 	[[self textStorage] endEditing];
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
