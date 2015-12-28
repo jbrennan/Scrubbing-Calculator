@@ -8,7 +8,7 @@
 
 #import "JBScrubbingTextView.h"
 #import "JBExpressionEvaluator.h"
-#import <ParseKit/ParseKit.h>
+
 
 @interface JBScrubbingTextView () <NSTextStorageDelegate>
 @property (nonatomic, strong) NSMutableDictionary *numberRanges;
@@ -101,41 +101,41 @@
 	self.numberRanges = [NSMutableDictionary new];
 	
 	NSString *string = [[self textStorage] string];
-	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:string];
-	
-	tokenizer.commentState.reportsCommentTokens = NO;
-	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
-	
-	// Recognize 'x' as a symbol for multiplication
-	[tokenizer setTokenizerState:tokenizer.symbolState from:'x' to:'x'];
-	[tokenizer setTokenizerState:tokenizer.symbolState from:'X' to:'X'];
-	
-	PKToken *eof = [PKToken EOFToken];
-	PKToken *token = nil;
-	
-	
-	NSUInteger currentLocation = 0;
-	
-	while ((token = [tokenizer nextToken]) != eof) {
-		NSRange numberRange = NSMakeRange(currentLocation, [[token stringValue] length]);
-		
-		if ([token isNumber]) {
-			[expressionTokens addObject:[token stringValue]];
-			
-			[self setNumberString:[token stringValue] forRange:numberRange];
-			
-		} else if ([token isSymbol] && [_symbols containsObject:[token stringValue]]) {
-			
-			if ([[token stringValue] isEqualToString:@"="]) break;
-			
-			[expressionTokens addObject:[token stringValue]];
-		} else if ([token isSymbol] && [[token stringValue] isEqualToString:@"="]) {
-			break;
-		}
-		
-		currentLocation += [[token stringValue] length];
-	
-	}
+//	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:string];
+//	
+//	tokenizer.commentState.reportsCommentTokens = NO;
+//	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
+//	
+//	// Recognize 'x' as a symbol for multiplication
+//	[tokenizer setTokenizerState:tokenizer.symbolState from:'x' to:'x'];
+//	[tokenizer setTokenizerState:tokenizer.symbolState from:'X' to:'X'];
+//	
+//	PKToken *eof = [PKToken EOFToken];
+//	PKToken *token = nil;
+//	
+//	
+//	NSUInteger currentLocation = 0;
+//	
+//	while ((token = [tokenizer nextToken]) != eof) {
+//		NSRange numberRange = NSMakeRange(currentLocation, [[token stringValue] length]);
+//		
+//		if ([token isNumber]) {
+//			[expressionTokens addObject:[token stringValue]];
+//			
+//			[self setNumberString:[token stringValue] forRange:numberRange];
+//			
+//		} else if ([token isSymbol] && [_symbols containsObject:[token stringValue]]) {
+//			
+//			if ([[token stringValue] isEqualToString:@"="]) break;
+//			
+//			[expressionTokens addObject:[token stringValue]];
+//		} else if ([token isSymbol] && [[token stringValue] isEqualToString:@"="]) {
+//			break;
+//		}
+//		
+//		currentLocation += [[token stringValue] length];
+//	
+//	}
 
 	
 	
@@ -179,41 +179,41 @@
 
 
 - (void)highlightText {
-	NSString *string = [[self textStorage] string];
-	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:string];
-	
-	tokenizer.commentState.reportsCommentTokens = NO;
-	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
-	
-	// Recognize 'x' as a symbol for multiplication
-	[tokenizer setTokenizerState:tokenizer.symbolState from:'x' to:'x'];
-	[tokenizer setTokenizerState:tokenizer.symbolState from:'X' to:'X'];
-	
-	PKToken *eof = [PKToken EOFToken];
-	PKToken *token = nil;
-	
-	[[self textStorage] beginEditing];
-	
-	NSUInteger currentLocation = 0;
-	
-	while ((token = [tokenizer nextToken]) != eof) {
-		NSColor *fontColor = [NSColor grayColor];
-		
-		if ([token isNumber]) {
-			fontColor = [NSColor textColor];
-		} else if ([token isSymbol]) {
-			// which symbol?
-			if ([_symbols containsObject:[token stringValue]]) {
-				fontColor = [NSColor purpleColor];
-			}
-		}
-		
-		[[self textStorage] addAttribute:NSForegroundColorAttributeName value:fontColor range:NSMakeRange(currentLocation, [[token stringValue] length])];
-		currentLocation += [[token stringValue] length];
-	}
-	
-	
-	[[self textStorage] endEditing];
+//	NSString *string = [[self textStorage] string];
+//	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:string];
+//	
+//	tokenizer.commentState.reportsCommentTokens = NO;
+//	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
+//	
+//	// Recognize 'x' as a symbol for multiplication
+//	[tokenizer setTokenizerState:tokenizer.symbolState from:'x' to:'x'];
+//	[tokenizer setTokenizerState:tokenizer.symbolState from:'X' to:'X'];
+//	
+//	PKToken *eof = [PKToken EOFToken];
+//	PKToken *token = nil;
+//	
+//	[[self textStorage] beginEditing];
+//	
+//	NSUInteger currentLocation = 0;
+//	
+//	while ((token = [tokenizer nextToken]) != eof) {
+//		NSColor *fontColor = [NSColor grayColor];
+//		
+//		if ([token isNumber]) {
+//			fontColor = [NSColor textColor];
+//		} else if ([token isSymbol]) {
+//			// which symbol?
+//			if ([_symbols containsObject:[token stringValue]]) {
+//				fontColor = [NSColor purpleColor];
+//			}
+//		}
+//		
+//		[[self textStorage] addAttribute:NSForegroundColorAttributeName value:fontColor range:NSMakeRange(currentLocation, [[token stringValue] length])];
+//		currentLocation += [[token stringValue] length];
+//	}
+//	
+//	
+//	[[self textStorage] endEditing];
 }
 
 
@@ -291,128 +291,128 @@
 }
 
 
-- (void)mouseDown:(NSEvent *)theEvent {
-	if (self.currentlyHighlightedRange.location == NSNotFound) {
-		[super mouseDown:theEvent];
-		return;
-	}
-	
-	self.initialDragPoint = [NSEvent mouseLocation];
-	self.initialString = [[self string] substringWithRange:self.currentlyHighlightedRange];
-	self.initialNumber = [self numberFromString:self.initialString];
-	
-	NSString *wholeText = [self string];
-	
-	
-	NSString *originalLine = [self lineForCurrentlyHighlightedRange];
-	NSRange originalLineRange = [wholeText rangeOfString:originalLine];
-	
-	self.initialDragLine = originalLine;
-
-}
-
-
-- (void)mouseDragged:(NSEvent *)theEvent {
-	
-	// Skip it if we're not currently dragging a word
-	if (self.currentlyHighlightedRange.location == NSNotFound) {
-		[super mouseDragged:theEvent];
-		return;
-	}
-	
-	NSLog(@"mouse dragged, current range is: %@", NSStringFromRange(self.currentlyHighlightedRange));
-	
-	//NSRange numberRange = [self numberStringRangeForCharacterIndex:self.currentlyHighlightedRange.location];
-	NSRange numberRange = [self rangeForNumberNearestToIndex:self.currentlyHighlightedRange.location];
-	NSString *numberString = [[self string] substringWithRange:numberRange];
-	
-	NSLog(@"Dragging...current number is: %@", numberString);
-	NSNumber *number = [self numberFromString:numberString];
-	
-	if (nil == number) {
-		NSLog(@"Couldn't parse a number out of :%@", numberString);
-		return;
-	}
-	
-	CGPoint screenPoint = [NSEvent mouseLocation];
-	CGFloat x = screenPoint.x - self.initialDragPoint.x;
-	CGFloat y = screenPoint.y - self.initialDragPoint.y;
-	CGSize offset = CGSizeMake(x, y);
-	
-	
-	NSInteger offsetValue = [self.initialNumber integerValue] + (NSInteger)offset.width;
-	NSNumber *updatedNumber = @(offsetValue);
-	NSString *updatedNumberString = [updatedNumber stringValue];
-	
-	
-	// Now do the replacement in the existing text
-	NSString *replacedCommand = [self.initialDragCommandString stringByReplacingCharactersInRange:self.initialDragRangeInOriginalCommand withString:updatedNumberString];
-	
-	[super insertText:updatedNumberString replacementRange:self.currentlyHighlightedRange];
-	self.currentlyHighlightedRange = NSMakeRange(self.currentlyHighlightedRange.location, [updatedNumberString length]);
-	
-	
-	// Update the position of commandStart depending on how our (whole) string has changed.
-	NSUInteger lengthDifference = [self.initialDragCommandString length] - [replacedCommand length];
-	self.commandStart = self.initialDragCommandStart - lengthDifference;
-	
-	if (self.numberDragHandler) {
-		self.numberDragHandler(replacedCommand);
-	}
-}
-
-
-- (void)mouseUp:(NSEvent *)theEvent {
-	// Skip it if we're not currently dragging a word
-	if (self.currentlyHighlightedRange.location == NSNotFound) {
-		[super mouseUp:theEvent];
-		return;
-	}
-	
-	// Triggers clearing out our number-dragging state.
-	[self highlightText];
-	[self mouseMoved:theEvent];
-	
-	self.initialDragCommandString = nil;
-	self.initialDragCommandRange = NSMakeRange(NSNotFound, NSNotFound);
-	self.initialNumber = nil;
-}
-
-
-- (NSRange)rangeForNumberNearestToIndex:(NSUInteger)index {
-	// parse this out right now...
-	NSRange originalRange = self.initialDragCommandRange;
-	
-	// The problem is the command doesn't get updated in our history, so it breaks after the first use!!
-	NSString *currentCommand = [self currentLineForRange:originalRange];
-	
-	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:currentCommand];
-	
-	tokenizer.commentState.reportsCommentTokens = NO;
-	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
-	
-	
-	PKToken *eof = [PKToken EOFToken];
-	PKToken *token = nil;
-	
-	
-	NSUInteger currentLocation = 0; // in the command!
-	
-	while ((token = [tokenizer nextToken]) != eof) {
-		
-		NSRange numberRange = NSMakeRange(currentLocation + originalRange.location, [[token stringValue] length]);
-		
-		if ([token isNumber]) {
-			if (NSLocationInRange(index, numberRange)) {
-				return numberRange;
-			}
-		}
-		
-		
-		currentLocation += [[token stringValue] length];
-		
-	}
-	return NSMakeRange(NSNotFound, NSNotFound);
-}
+//- (void)mouseDown:(NSEvent *)theEvent {
+//	if (self.currentlyHighlightedRange.location == NSNotFound) {
+//		[super mouseDown:theEvent];
+//		return;
+//	}
+//	
+//	self.initialDragPoint = [NSEvent mouseLocation];
+//	self.initialString = [[self string] substringWithRange:self.currentlyHighlightedRange];
+//	self.initialNumber = [self numberFromString:self.initialString];
+//	
+//	NSString *wholeText = [self string];
+//	
+//	
+//	NSString *originalLine = [self lineForCurrentlyHighlightedRange];
+//	NSRange originalLineRange = [wholeText rangeOfString:originalLine];
+//	
+//	self.initialDragLine = originalLine;
+//
+//}
+//
+//
+//- (void)mouseDragged:(NSEvent *)theEvent {
+//	
+//	// Skip it if we're not currently dragging a word
+//	if (self.currentlyHighlightedRange.location == NSNotFound) {
+//		[super mouseDragged:theEvent];
+//		return;
+//	}
+//	
+//	NSLog(@"mouse dragged, current range is: %@", NSStringFromRange(self.currentlyHighlightedRange));
+//	
+//	//NSRange numberRange = [self numberStringRangeForCharacterIndex:self.currentlyHighlightedRange.location];
+//	NSRange numberRange = [self rangeForNumberNearestToIndex:self.currentlyHighlightedRange.location];
+//	NSString *numberString = [[self string] substringWithRange:numberRange];
+//	
+//	NSLog(@"Dragging...current number is: %@", numberString);
+//	NSNumber *number = [self numberFromString:numberString];
+//	
+//	if (nil == number) {
+//		NSLog(@"Couldn't parse a number out of :%@", numberString);
+//		return;
+//	}
+//	
+//	CGPoint screenPoint = [NSEvent mouseLocation];
+//	CGFloat x = screenPoint.x - self.initialDragPoint.x;
+//	CGFloat y = screenPoint.y - self.initialDragPoint.y;
+//	CGSize offset = CGSizeMake(x, y);
+//	
+//	
+//	NSInteger offsetValue = [self.initialNumber integerValue] + (NSInteger)offset.width;
+//	NSNumber *updatedNumber = @(offsetValue);
+//	NSString *updatedNumberString = [updatedNumber stringValue];
+//	
+//	
+//	// Now do the replacement in the existing text
+//	NSString *replacedCommand = [self.initialDragCommandString stringByReplacingCharactersInRange:self.initialDragRangeInOriginalCommand withString:updatedNumberString];
+//	
+//	[super insertText:updatedNumberString replacementRange:self.currentlyHighlightedRange];
+//	self.currentlyHighlightedRange = NSMakeRange(self.currentlyHighlightedRange.location, [updatedNumberString length]);
+//	
+//	
+//	// Update the position of commandStart depending on how our (whole) string has changed.
+//	NSUInteger lengthDifference = [self.initialDragCommandString length] - [replacedCommand length];
+//	self.commandStart = self.initialDragCommandStart - lengthDifference;
+//	
+//	if (self.numberDragHandler) {
+//		self.numberDragHandler(replacedCommand);
+//	}
+//}
+//
+//
+//- (void)mouseUp:(NSEvent *)theEvent {
+//	// Skip it if we're not currently dragging a word
+//	if (self.currentlyHighlightedRange.location == NSNotFound) {
+//		[super mouseUp:theEvent];
+//		return;
+//	}
+//	
+//	// Triggers clearing out our number-dragging state.
+//	[self highlightText];
+//	[self mouseMoved:theEvent];
+//	
+//	self.initialDragCommandString = nil;
+//	self.initialDragCommandRange = NSMakeRange(NSNotFound, NSNotFound);
+//	self.initialNumber = nil;
+//}
+//
+//
+//- (NSRange)rangeForNumberNearestToIndex:(NSUInteger)index {
+//	// parse this out right now...
+//	NSRange originalRange = self.initialDragCommandRange;
+//	
+//	// The problem is the command doesn't get updated in our history, so it breaks after the first use!!
+//	NSString *currentCommand = [self currentLineForRange:originalRange];
+//	
+//	PKTokenizer *tokenizer = [PKTokenizer tokenizerWithString:currentCommand];
+//	
+//	tokenizer.commentState.reportsCommentTokens = NO;
+//	tokenizer.whitespaceState.reportsWhitespaceTokens = YES;
+//	
+//	
+//	PKToken *eof = [PKToken EOFToken];
+//	PKToken *token = nil;
+//	
+//	
+//	NSUInteger currentLocation = 0; // in the command!
+//	
+//	while ((token = [tokenizer nextToken]) != eof) {
+//		
+//		NSRange numberRange = NSMakeRange(currentLocation + originalRange.location, [[token stringValue] length]);
+//		
+//		if ([token isNumber]) {
+//			if (NSLocationInRange(index, numberRange)) {
+//				return numberRange;
+//			}
+//		}
+//		
+//		
+//		currentLocation += [[token stringValue] length];
+//		
+//	}
+//	return NSMakeRange(NSNotFound, NSNotFound);
+//}
 
 @end
